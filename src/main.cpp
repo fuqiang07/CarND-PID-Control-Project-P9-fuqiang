@@ -94,8 +94,17 @@ int main()
   double steer_output = 1.0;
   pid_steer.Init(steer_Kp, steer_Ki, steer_Kd, steer_output);
 
+  //for the speed tuning, it is more likely as thermal control.
+  /* My tuning for throttle
+   set Kp = 0.1, Ki = 0, Kd = 0 at first and find there is large static error
+   set Kp = 0.1, Ki = 0, Kd = 1, system is unstable
+   set Kp = 0.1, Ki = 0, Kd = 0.1, system becomes unstable
+   set Kp = 0.1, Ki = 0.001, Kd = 0.1, large oscillation
+   set Kp = 0.1, Ki = 0.0001, Kd = 0.1, no oscillation, but still static error
+  //
+  */
   double throttle_Kp = 0.1;
-  double throttle_Ki = 0.001;
+  double throttle_Ki = 0.0002;
   double throttle_Kd = 0.1;
   double throttle_output = 1.0;
   pid_throttle.Init(throttle_Kp, throttle_Ki, throttle_Kd, throttle_output);
@@ -146,7 +155,7 @@ int main()
           }
 
           //control the throttle based on speed error
-          // Speed is set between 10 and 30 mph depending on how steep the steering angle is
+          // Speed is set to a constant value 25mph
           double speed_target = 25.0;
           double speed_error = speed - speed_target;
           pid_throttle.UpdateError(speed - speed_target);
