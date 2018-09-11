@@ -75,13 +75,13 @@ int main()
    * Step 1.0: set Kp = 0.01, Ki = 0, Kd = 1. results: no oscillation, respond sluggishly, out of the lane
    * Step 1.1: set Kp = 0.01, Ki = 0, Kd = 2. results: no oscillation, respond sluggishly, out of the lane
    * Step 1.2: set Kp = 0.01, Ki = 0, Kd = 4. results: no oscillation, respond sluggishly, out of the lane
-   * Step 1.3: set Kp = 0.01, Ki = 0, Kd = 10. results: within the lane, respond quick, change angle frequently
-   * Step 1.4: set Kp = 0.01, Ki = 0, Kd = 20. results: within the lane, respond quick, change angle not often
-   * Step 2.0: set Kp = 0.2, Ki = 0, Kd = 20. results: error decreased, no oscillation
+   * Step 1.3: set Kp = 0.01, Ki = 0, Kd = 10. results: within the lane, respond quick, change angle not often
+   * Step 1.4: set Kp = 0.01, Ki = 0, Kd = 20. results: within the lane, respond quick, change angle frequently
+   * Step 2.0: set Kp = 0.1, Ki = 0, Kd = 10. results: error decreased, no oscillation
    * Step 2.1: set Kp = 2, Ki = 0, Kd = 20. results: error decreased, sometimes oscillation
    * Step 2.2: set Kp = 0.5, Ki = 0, Kd = 20. results: error decreased, sometimes oscillation
    */
-  double steer_Kp = 0.01;
+  double steer_Kp = 0.1;
   double steer_Ki = 0.0;
   double steer_Kd = 10.0;
   double steer_output = 1.0;
