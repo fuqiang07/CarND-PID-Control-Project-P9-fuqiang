@@ -42,7 +42,7 @@ int main()
 {
   uWS::Hub h;
 
-  PID pid_steer, pid_speed;
+  PID pid_steer, pid_throttle;
   // TODO: Initialize the pid variable.
 
   //debug info
@@ -85,6 +85,8 @@ int main()
    * Step 3.2: set Kp = 0.2, Ki = 0.04, Kd = 10. results: oscillation --> unstable
    * Step 3.2: set Kp = 0.2, Ki = 0.01, Kd = 10. results: a few oscillation, but still stable
    final setting: set Kp = 0.2, Ki = 0.004, Kd = 10
+   Note: for this tuning, the most difficult part is to define the oscillation, since there is not tracking trajectory
+   .to view. For further tuning, I shall plot the tracking trajectory for reference.
    */
   double steer_Kp = 0.2;
   double steer_Ki = 0.004;
@@ -92,7 +94,11 @@ int main()
   double steer_output = 1.0;
   pid_steer.Init(steer_Kp, steer_Ki, steer_Kd, steer_output);
 
-  //pid_speed.Init(double Kp = 0.1, double Ki = 1.0, double Kd = 0.0001);
+  double throttle_Kp = 0.1;
+  double throttle_Ki = 0.001;
+  double throttle_Kd = 10.0;
+  double throttle_output = 1.0;
+  pid_throttle.Init(throttle_Kp, throttle_Ki, throttle_Kd, throttle_output);
 
   //debug info
   Debug( "[main]: pid for steer are set as following: " << endl);
@@ -100,8 +106,13 @@ int main()
   Debug( "[main]: Ki_ = " << pid_steer.Ki_ << endl);
   Debug( "[main]: Kd_ = " << pid_steer.Kd_ << endl);
 
+  Debug( "[main]: pid for throttle are set as following: " << endl);
+  Debug( "[main]: Kp_ = " << pid_throttle.Kp_ << endl);
+  Debug( "[main]: Ki_ = " << pid_throttle.Ki_ << endl);
+  Debug( "[main]: Kd_ = " << pid_throttle.Kd_ << endl);
 
-  h.onMessage([&pid_steer](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, uWS::OpCode opCode) {
+
+  h.onMessage([&pid_steer, &pid_throttle](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, uWS::OpCode opCode) {
     // "42" at the start of the message means there's a websocket message event.
     // The 4 signifies a websocket message
     // The 2 signifies a websocket event
@@ -114,29 +125,43 @@ int main()
         if (event == "telemetry") {
           // j[1] is the data JSON object
           double cte = std::stod(j[1]["cte"].get<std::string>());
-          //double speed = std::stod(j[1]["speed"].get<std::string>());
-          //double angle = std::stod(j[1]["steering_angle"].get<std::string>());
+          double speed = std::stod(j[1]["speed"].get<std::string>());
+          double angle = std::stod(j[1]["steering_angle"].get<std::string>());
           double steer_value;
+          double throttle_value;
           /*
           * TODO: Calcuate steering value here, remember the steering value is
           * [-1, 1].
           * NOTE: Feel free to play around with the throttle and speed. Maybe use
           * another PID controller to control the speed!
           */
-          pid_steer.UpdateError(cte = cte);
+
+          //control the steer based on cte error
+          pid_steer.UpdateError(cte);
           steer_value = pid_steer.TotalError();
           if(steer_value > 1.0){
               steer_value = 1.0;
           }else if(steer_value < -1.0){
               steer_value = -1.0;
           }
-          
+
+          //control the throttle based on speed error
+          // Speed is set between 10 and 30 mph depending on how steep the steering angle is
+          double speed_target = 20.0;
+          pid_throttle.UpdateError(speed - speed_target);
+          throttle_value = pid_throttle.TotalError();
+          if(throttle_value > 1.0){
+            throttle_value = 1.0;
+          }else if(throttle_value < -1.0){
+            throttle_value = -1.0;
+          }
+
           // DEBUG
           std::cout << "CTE: " << cte << " Steering Value: " << steer_value << std::endl;
 
           json msgJson;
           msgJson["steering_angle"] = steer_value;
-          msgJson["throttle"] = 0.3;
+          msgJson["throttle"] = throttle_value;
           auto msg = "42[\"steer\"," + msgJson.dump() + "]";
           std::cout << msg << std::endl;
           ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
