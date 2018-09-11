@@ -76,9 +76,10 @@ int main()
    * Step 1.1: set Kp = 0.01, Ki = 0, Kd = 10. results: no oscillation, respond quicker, within the lane :-)
    * Step 1.2: set Kp = 0.01, Ki = 0, Kd = 100. results: within the lane, respond too quick, change angle too often
    * Step 1.3: set Kp = 0.01, Ki = 0, Kd = 40. results: within the lane, respond quick, change angle frequently
-   * Step 1.4: set Kp = 0.01, Ki = 0, Kd = 20. results: within the lane, respond quick, change angle frequently
+   * Step 1.4: set Kp = 0.01, Ki = 0, Kd = 20. results: within the lane, respond quick, change angle not often
+   * Step 2.0: set Kp = 0.2, Ki = 0, Kd = 20. results: large oscillation --> unstable
    */
-  double steer_Kp = 0.01;
+  double steer_Kp = 0.2;
   double steer_Ki = 0.0;
   double steer_Kd = 20.0;
   double steer_output = 1.0;
