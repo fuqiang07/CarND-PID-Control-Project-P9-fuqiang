@@ -49,9 +49,9 @@ int main()
   Debug( "[main]: Initialization begin: ====================" << endl);
 
   //pid_speed.Init(double Kp = 0.1, double Ki = 1.0, double Kd = 0.0001);
-  double steer_Kp = 0.1;
-  double steer_Ki = 1.0;
-  double steer_Kd = 0.0001;
+  double steer_Kp = 1;
+  double steer_Ki = 0.0;
+  double steer_Kd = 0.0;
   pid_steer.Init(steer_Kp, steer_Ki, steer_Kd);
 
   //debug info
