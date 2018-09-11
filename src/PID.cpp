@@ -43,8 +43,8 @@ void PID::UpdateError(double cte) {
     if (!is_initialized_) {
 
         // first measurement
-        p_error_ = cte;
-        i_error_ = 0.0 + cte;
+        p_error_ = -cte;
+        i_error_ = -cte;
         d_error_ = 0.0;
 
         // done initializing,
@@ -56,11 +56,11 @@ void PID::UpdateError(double cte) {
     *  Update Error
     ****************************************************************************/
     //when p_error_ is not updated, it keeps the value of the previous error
-    d_error_ = cte - p_error_;
+    d_error_ = -cte - p_error_;
 
-    p_error_ = cte;
+    p_error_ = -cte;
 
-    i_error_ += cte;
+    i_error_ += -cte;
 }
 
 /*
