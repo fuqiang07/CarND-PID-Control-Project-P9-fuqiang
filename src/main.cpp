@@ -147,7 +147,7 @@ int main()
 
           //control the throttle based on speed error
           // Speed is set between 10 and 30 mph depending on how steep the steering angle is
-          double speed_target = 20.0 * (1.0 - abs(steer_value)) + 10.0;
+          double speed_target = 20.0;
           double speed_error = speed - speed_target;
           pid_throttle.UpdateError(speed - speed_target);
           throttle_value = pid_throttle.TotalError();
