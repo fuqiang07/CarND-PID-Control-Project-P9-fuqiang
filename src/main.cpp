@@ -96,7 +96,7 @@ int main()
 
   double throttle_Kp = 0.1;
   double throttle_Ki = 0.0001;
-  double throttle_Kd = 1.0;
+  double throttle_Kd = 0.1;
   double throttle_output = 1.0;
   pid_throttle.Init(throttle_Kp, throttle_Ki, throttle_Kd, throttle_output);
 
