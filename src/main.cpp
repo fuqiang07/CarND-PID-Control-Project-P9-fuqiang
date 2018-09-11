@@ -73,8 +73,8 @@ int main()
    * Step 0.1: set Kp = 0.1, Ki = 0, Kd = 0. results: small oscillation --> unstable
    * Step 0.2: set Kp = 0.01, Ki = 0, Kd = 0. results: no oscillation ,but the system cannot respond quickly
    * Step 1.0: set Kp = 0.01, Ki = 0, Kd = 1. results: no oscillation, respond sluggishly, out of the lane
-   * Step 1.1: set Kp = 0.01, Ki = 0, Kd = 2. results: no oscillation, respond quicker, within the lane :-)
-   * Step 1.2: set Kp = 0.01, Ki = 0, Kd = 100. results: within the lane, respond too quick, change angle too often
+   * Step 1.1: set Kp = 0.01, Ki = 0, Kd = 2. results: no oscillation, respond sluggishly, out of the lane
+   * Step 1.2: set Kp = 0.01, Ki = 0, Kd = 4. results: within the lane, respond too quick, change angle too often
    * Step 1.3: set Kp = 0.01, Ki = 0, Kd = 40. results: within the lane, respond quick, change angle frequently
    * Step 1.4: set Kp = 0.01, Ki = 0, Kd = 20. results: within the lane, respond quick, change angle not often
    * Step 2.0: set Kp = 0.2, Ki = 0, Kd = 20. results: error decreased, no oscillation
@@ -83,7 +83,7 @@ int main()
    */
   double steer_Kp = 0.01;
   double steer_Ki = 0.0;
-  double steer_Kd = 2.0;
+  double steer_Kd = 4.0;
   double steer_output = 1.0;
   pid_steer.Init(steer_Kp, steer_Ki, steer_Kd, steer_output);
 
