@@ -81,12 +81,12 @@ int main()
    * Step 2.1: set Kp = 1, Ki = 0, Kd = 10. results: error decreased, sometimes oscillation
    * Step 2.2: set Kp = 0.5, Ki = 0, Kd = 10. results: sometimes oscillation
    * Step 2.2: set Kp = 0.2, Ki = 0, Kd = 10. results: sometimes oscillation
-   * Step 3.0: set Kp = 0.1, Ki = 0.001, Kd = 10. results: sometimes oscillation
-   * Step 2.2: set Kp = 0.1, Ki = 0, Kd = 10. results: sometimes oscillation
+   * Step 3.0: set Kp = 0.1, Ki = 0.001, Kd = 10. results: sometimes out of the lane at sharp turns
+   * Step 2.2: set Kp = 0.1, Ki = 0.0001, Kd = 10. results: sometimes oscillation
    * Step 2.2: set Kp = 0.1, Ki = 0, Kd = 10. results: sometimes oscillation
    * Step 2.2: set Kp = 0.1, Ki = 0, Kd = 10. results: sometimes oscillation* * * * */
   double steer_Kp = 0.1;
-  double steer_Ki = 0.001;
+  double steer_Ki = 0.0001;
   double steer_Kd = 10.0;
   double steer_output = 1.0;
   pid_steer.Init(steer_Kp, steer_Ki, steer_Kd, steer_output);
