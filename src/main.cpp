@@ -48,8 +48,11 @@ int main()
   //debug info
   Debug( "[main]: Initialization begin: ====================" << endl);
 
-  pid_speed.Init(double Kp = 0.1, double Ki = 1.0, double Kd = 0.0001);
-  pid_steer.Init(double Kp = 0.1, double Ki = 1.0, double Kd = 0.0001);
+  //pid_speed.Init(double Kp = 0.1, double Ki = 1.0, double Kd = 0.0001);
+  double steer_Kp = 0.1;
+  double steer_Ki = 1.0;
+  double steer_Kd = 0.0001;
+  pid_steer.Init(steer_Kp, steer_Ki, steer_Kd);
 
   //debug info
   Debug( "[main]: pid for steer are set as following: " << endl);
@@ -58,7 +61,7 @@ int main()
   Debug( "[main]: Kd_ = " << pid_steer.Kd_ << endl);
 
 
-  h.onMessage([&pid](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, uWS::OpCode opCode) {
+  h.onMessage([&pid_steer](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, uWS::OpCode opCode) {
     // "42" at the start of the message means there's a websocket message event.
     // The 4 signifies a websocket message
     // The 2 signifies a websocket event
