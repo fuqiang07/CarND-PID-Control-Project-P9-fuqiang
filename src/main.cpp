@@ -9,7 +9,7 @@ using json = nlohmann::json;
 using namespace std;
 
 //debug
-#define USERDEBUG
+//#define USERDEBUG
 
 #ifdef USERDEBUG
 #define Debug(x) cout << x
@@ -101,6 +101,7 @@ int main()
    set Kp = 0.1, Ki = 0, Kd = 0.1, system becomes unstable
    set Kp = 0.1, Ki = 0.001, Kd = 0.1, large oscillation
    set Kp = 0.1, Ki = 0.0001, Kd = 0.1, no oscillation, but still static error
+   set Kp = 0.1, Ki = 0.0002, Kd = 0.1, no oscillation, low static error
   //
   */
   double throttle_Kp = 0.1;
