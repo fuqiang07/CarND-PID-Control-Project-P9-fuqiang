@@ -6,6 +6,16 @@
 
 // for convenience
 using json = nlohmann::json;
+using namespace std;
+
+//debug
+#define USERDEBUG
+
+#ifdef USERDEBUG
+#define Debug(x) cout << x
+#else
+#define Debug(x)
+#endif
 
 // For converting back and forth between radians and degrees.
 constexpr double pi() { return M_PI; }
@@ -35,8 +45,17 @@ int main()
   PID pid_steer, pid_speed;
   // TODO: Initialize the pid variable.
   // tune the parameters by trial-and-error
-  pid_speed.Init(Kp = 0.1, Ki = 1.0, Kd = 0.0001);
-  pid_steer.Init(Kp = 0.1, Ki = 1.0, Kd = 0.0001);
+  //debug info
+  Debug( "[main]: Initialization begin: ====================" << endl);
+
+  pid_speed.Init(double Kp = 0.1, double Ki = 1.0, double Kd = 0.0001);
+  pid_steer.Init(double Kp = 0.1, double Ki = 1.0, double Kd = 0.0001);
+
+  //debug info
+  Debug( "[main]: pid for steer are set as following: " << endl);
+  Debug( "[main]: Kp_ = " << pid_steer.Kp_ << endl);
+  Debug( "[main]: Ki_ = " << pid_steer.Ki_ << endl);
+  Debug( "[main]: Kd_ = " << pid_steer.Kd_ << endl);
 
 
   h.onMessage([&pid](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, uWS::OpCode opCode) {
@@ -52,8 +71,8 @@ int main()
         if (event == "telemetry") {
           // j[1] is the data JSON object
           double cte = std::stod(j[1]["cte"].get<std::string>());
-          double speed = std::stod(j[1]["speed"].get<std::string>());
-          double angle = std::stod(j[1]["steering_angle"].get<std::string>());
+          //double speed = std::stod(j[1]["speed"].get<std::string>());
+          //double angle = std::stod(j[1]["steering_angle"].get<std::string>());
           double steer_value;
           /*
           * TODO: Calcuate steering value here, remember the steering value is
