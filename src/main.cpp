@@ -49,12 +49,31 @@ int main()
   Debug( "[main]: Initialization begin: ====================" << endl);
 
 
+  ///* Tuning reference
   /* tune the parameters by trial-and-error with refernce:
    * https://www.wescottdesign.com/articles/pid/pidWithoutAPhd.pdf
-   * Step 1: set Kp = 1, Ki = 0, Kd = 0. results: oscillation --> unstable
-   * Step 2: set Kp = 0.1, Ki = 0, Kd = 0. results: oscillation --> unstable
+   * tuning process can be shown as below
+   * Step 0: set Ki = Kd = 0, set a low Kp without oscillation
+   * Step 1: TUNE Kd:
+   *          Set Kd = 100*Kp as a starting point.
+   *          If no oscillation, set Kd = Kd*2; If oscillation, set Kd = Kd/2;
+   *          Once close to oscillation, fine tune Kd = Kd/2;
+   * Step 2: TUNE Kp:
+   *          Set Kp = Kd/100 as a starting point.
+   *          If no oscillation, set Kp = Kp*10; If oscillation, set Kp = Kp/10;
+   *          Once close to oscillation, fine tune Kp = Kp/2;
+   * Step 3: TUNE Ki:
+   *          Set Ki = (Kp/Kd) * Kp as a starting point.
+   *          If no oscillation, set Ki= Ki*10; If oscillation, set Ki = Ki/10;
+   *          Once close to oscillation, fine tune Ki = Ki/2;
    */
-  double steer_Kp = 0.1;
+
+  /* My tuning for steer
+   * Step 0.0: set Kp = 1, Ki = 0, Kd = 0. results: large oscillation --> unstable
+   * Step 0.1: set Kp = 0.1, Ki = 0, Kd = 0. results: small oscillation --> unstable
+   * Step 0.2: set Kp = 0.01, Ki = 0, Kd = 0. results: small oscillation --> unstable
+   */
+  double steer_Kp = 0.01;
   double steer_Ki = 0.0;
   double steer_Kd = 0.0;
   double steer_output = 1.0;
