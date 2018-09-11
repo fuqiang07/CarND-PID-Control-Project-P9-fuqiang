@@ -80,9 +80,9 @@ int main()
    * Step 2.0: set Kp = 0.1, Ki = 0, Kd = 10. results: error decreased, no oscillation
    * Step 2.1: set Kp = 1, Ki = 0, Kd = 10. results: error decreased, sometimes oscillation
    * Step 2.2: set Kp = 0.5, Ki = 0, Kd = 10. results: sometimes oscillation
-   * Step 2.2: set Kp = 0.5, Ki = 0, Kd = 10. results: sometimes oscillation
+   * Step 2.2: set Kp = 0.2, Ki = 0, Kd = 10. results: sometimes oscillation
    * */
-  double steer_Kp = 0.2;
+  double steer_Kp = 0.1;
   double steer_Ki = 0.0;
   double steer_Kd = 10.0;
   double steer_output = 1.0;
