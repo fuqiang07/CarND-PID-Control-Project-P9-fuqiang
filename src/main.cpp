@@ -76,7 +76,7 @@ int main()
    */
   double steer_Kp = 0.01;
   double steer_Ki = 0.0;
-  double steer_Kd = 1.0;
+  double steer_Kd = 10.0;
   double steer_output = 1.0;
   pid_steer.Init(steer_Kp, steer_Ki, steer_Kd, steer_output);
 
