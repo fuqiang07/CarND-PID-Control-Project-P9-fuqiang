@@ -44,15 +44,23 @@ int main()
 
   PID pid_steer, pid_speed;
   // TODO: Initialize the pid variable.
-  // tune the parameters by trial-and-error
+
   //debug info
   Debug( "[main]: Initialization begin: ====================" << endl);
 
-  //pid_speed.Init(double Kp = 0.1, double Ki = 1.0, double Kd = 0.0001);
-  double steer_Kp = 1;
+
+  /* tune the parameters by trial-and-error with refernce:
+   * https://www.wescottdesign.com/articles/pid/pidWithoutAPhd.pdf
+   * Step 1: set Kp = 1, Ki = 0, Kd = 0. results: oscillation --> unstable
+   * Step 2: set Kp = 0.1, Ki = 0, Kd = 0. results: oscillation --> unstable
+   */
+  double steer_Kp = 0.1;
   double steer_Ki = 0.0;
   double steer_Kd = 0.0;
-  pid_steer.Init(steer_Kp, steer_Ki, steer_Kd);
+  double steer_output = 1.0;
+  pid_steer.Init(steer_Kp, steer_Ki, steer_Kd, steer_output);
+
+  //pid_speed.Init(double Kp = 0.1, double Ki = 1.0, double Kd = 0.0001);
 
   //debug info
   Debug( "[main]: pid for steer are set as following: " << endl);
