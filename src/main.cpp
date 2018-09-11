@@ -95,8 +95,8 @@ int main()
   pid_steer.Init(steer_Kp, steer_Ki, steer_Kd, steer_output);
 
   double throttle_Kp = 0.1;
-  double throttle_Ki = 0.0;
-  double throttle_Kd = 0.0;
+  double throttle_Ki = 0.0001;
+  double throttle_Kd = 1.0;
   double throttle_output = 1.0;
   pid_throttle.Init(throttle_Kp, throttle_Ki, throttle_Kd, throttle_output);
 
@@ -158,7 +158,7 @@ int main()
           }
 
           //debug
-          Debug( "[main]: speed_error = " << speed_error << "throttle_value = " << throttle_value << endl);
+          Debug( "[main] ===================== : speed_error = " << speed_error << "      throttle_value = " << throttle_value << endl);
 
           // DEBUG
           std::cout << "CTE: " << cte << " Steering Value: " << steer_value << std::endl;
