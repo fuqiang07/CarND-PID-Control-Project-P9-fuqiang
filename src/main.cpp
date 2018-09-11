@@ -71,11 +71,12 @@ int main()
   /* My tuning for steer
    * Step 0.0: set Kp = 1, Ki = 0, Kd = 0. results: large oscillation --> unstable
    * Step 0.1: set Kp = 0.1, Ki = 0, Kd = 0. results: small oscillation --> unstable
-   * Step 0.2: set Kp = 0.01, Ki = 0, Kd = 0. results: small oscillation --> unstable
+   * Step 0.2: set Kp = 0.01, Ki = 0, Kd = 0. results: no oscillation ,but the system cannot respond quickly
+   * Step 1.0: set Kp = 0.01, Ki = 0, Kd = 1. results: large oscillation --> unstable
    */
   double steer_Kp = 0.01;
   double steer_Ki = 0.0;
-  double steer_Kd = 0.0;
+  double steer_Kd = 1.0;
   double steer_output = 1.0;
   pid_steer.Init(steer_Kp, steer_Ki, steer_Kd, steer_output);
 
