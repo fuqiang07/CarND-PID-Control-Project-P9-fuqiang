@@ -126,7 +126,7 @@ int main()
           // j[1] is the data JSON object
           double cte = std::stod(j[1]["cte"].get<std::string>());
           double speed = std::stod(j[1]["speed"].get<std::string>());
-          double angle = std::stod(j[1]["steering_angle"].get<std::string>());
+          //double angle = std::stod(j[1]["steering_angle"].get<std::string>());
           double steer_value;
           double throttle_value;
           /*
@@ -148,6 +148,7 @@ int main()
           //control the throttle based on speed error
           // Speed is set between 10 and 30 mph depending on how steep the steering angle is
           double speed_target = 30.0;
+          double speed_error = speed - speed_target;
           pid_throttle.UpdateError(speed - speed_target);
           throttle_value = pid_throttle.TotalError();
           if(throttle_value > 1.0){
@@ -155,6 +156,9 @@ int main()
           }else if(throttle_value < -1.0){
             throttle_value = -1.0;
           }
+
+          //debug
+          Debug( "[main]: speed_error = " << speed_error << "throttle_value = " << throttle_value << endl);
 
           // DEBUG
           std::cout << "CTE: " << cte << " Steering Value: " << steer_value << std::endl;
