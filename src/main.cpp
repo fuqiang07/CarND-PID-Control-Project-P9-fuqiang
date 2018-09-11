@@ -96,7 +96,7 @@ int main()
 
   double throttle_Kp = 0.1;
   double throttle_Ki = 0.0001;
-  double throttle_Kd = 1.0;
+  double throttle_Kd = 10.0;
   double throttle_output = 1.0;
   pid_throttle.Init(throttle_Kp, throttle_Ki, throttle_Kd, throttle_output);
 
@@ -147,7 +147,7 @@ int main()
 
           //control the throttle based on speed error
           // Speed is set between 10 and 30 mph depending on how steep the steering angle is
-          double speed_target = 30.0;
+          double speed_target = 20.0 * (1.0 - abs(steer_value)) + 10.0;
           double speed_error = speed - speed_target;
           pid_throttle.UpdateError(speed - speed_target);
           throttle_value = pid_throttle.TotalError();
