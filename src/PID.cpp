@@ -44,11 +44,11 @@ void PID::Init(double Kp, double Ki, double Kd, double Max_Output) {
 
     // Twiddling parameters
     flag_twiddle = true;
-    dp = {0.1*Kp,0.1*Kd,0.1*Ki};
+    dp = {0.5*Kp,0.5*Kd,0.5*Ki};
     step = 1;
     param_index = 2;  // this will wrao back to 0 after the first twiddle loop
-    n_settle_steps = 0;
-    n_eval_steps = 1;
+    n_settle_steps = 100;
+    n_eval_steps = 2000;
     total_error = 0;
     best_error = std::numeric_limits<double>::max();
     tried_adding = false;

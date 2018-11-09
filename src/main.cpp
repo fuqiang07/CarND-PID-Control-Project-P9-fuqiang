@@ -169,7 +169,7 @@ int main()
 
           //control the throttle based on speed error
           // Speed is set to a constant value 25mph
-          double speed_target = 25.0;
+          double speed_target = 50.0;
           double speed_error = speed - speed_target;
           pid_throttle.UpdateError(speed - speed_target);
           throttle_value = pid_throttle.TotalError();
