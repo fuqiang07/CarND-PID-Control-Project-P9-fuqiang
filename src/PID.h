@@ -40,7 +40,7 @@ public:
   * Tune PID parameters by Twiddle Algorithm
   */
   //void TwiddleTuning(double cte);
-  void PID::AddToParameterAtIndex(int index, double amount);
+  void AddToParameterAtIndex(int index, double amount);
 
   /*
   * Constructor
