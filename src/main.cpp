@@ -98,8 +98,8 @@ int main()
   double steer_Ki = 0.004;
   double steer_Kd = 10.1;
   double steer_output = 1.0;
-  Tunings Tuning_type = Twiddle;
-  pid_steer.Init(steer_Kp, steer_Ki, steer_Kd, steer_output, Tuning_type);
+  Tunings steer_Tuning_type = Twiddle;
+  pid_steer.Init(steer_Kp, steer_Ki, steer_Kd, steer_output, steer_Tuning_type);
 
   //for the speed tuning, it is more likely as thermal control.
   /* My tuning for throttle
@@ -121,8 +121,8 @@ int main()
   double throttle_Ki = 0.0002;
   double throttle_Kd = 0.11;
   double throttle_output = 1.0;
-  Tunings Tuning_type = Twiddle;
-  pid_throttle.Init(throttle_Kp, throttle_Ki, throttle_Kd, throttle_output, Tuning_type);
+  Tunings throttle_Tuning_type = Twiddle;
+  pid_throttle.Init(throttle_Kp, throttle_Ki, throttle_Kd, throttle_output, throttle_Tuning_type);
 
   //debug info
   Debug( "[main]: pid for steer are set as following: " << endl);
