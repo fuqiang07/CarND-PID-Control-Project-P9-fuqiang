@@ -88,9 +88,15 @@ int main()
    Note: for this tuning, the most difficult part is to define the oscillation, since there is not tracking trajectory
    .to view. For further tuning, I shall plot the tracking trajectory for reference.
    */
-  double steer_Kp = 0.2;
+  //Manual Tuned Parameters
+  //double steer_Kp = 0.2;
+  //double steer_Ki = 0.004;
+  //double steer_Kd = 10.0;
+
+  //Twiddle Tuned Parameters based on Manual Tuned Parameters
+  double steer_Kp = 0.18;
   double steer_Ki = 0.004;
-  double steer_Kd = 10.0;
+  double steer_Kd = 10.1;
   double steer_output = 1.0;
   pid_steer.Init(steer_Kp, steer_Ki, steer_Kd, steer_output);
 
@@ -104,9 +110,15 @@ int main()
    set Kp = 0.1, Ki = 0.0002, Kd = 0.1, no oscillation, low static error
   //
   */
-  double throttle_Kp = 0.1;
+  //Manual Tuned Parameters
+  //double throttle_Kp = 0.1;
+  //double throttle_Ki = 0.0002;
+  //double throttle_Kd = 0.1;
+
+  //Twiddle Tuned Parameters based on Manual Tuned Parameters
+  double throttle_Kp = 0.11;
   double throttle_Ki = 0.0002;
-  double throttle_Kd = 0.1;
+  double throttle_Kd = 0.11;
   double throttle_output = 1.0;
   pid_throttle.Init(throttle_Kp, throttle_Ki, throttle_Kd, throttle_output);
 
