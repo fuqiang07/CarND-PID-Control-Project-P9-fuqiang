@@ -56,9 +56,9 @@ void PID::Init(double Kp, double Ki, double Kd, double Max_Output, Tunings Tunin
 
     // Adaptive PID
     flag_adaptive = true;
-    adap_p_gain = 1.0e-5;
-    adap_i_gain = 1.0e-6;
-    adap_d_gain = 1.0e-4;
+    adap_p_gain = 1.0e-6;
+    adap_i_gain = 1.0e-8;
+    adap_d_gain = 1.0e-3;
     adap_sliding_gain = 30;
 }
 
