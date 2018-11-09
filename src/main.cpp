@@ -98,7 +98,7 @@ int main()
   double steer_Ki = 0.004;
   double steer_Kd = 10.1;
   double steer_output = 1.0;
-  Tunings steer_Tuning_type = Adaptive;
+  Tunings steer_Tuning_type = Manual;
   pid_steer.Init(steer_Kp, steer_Ki, steer_Kd, steer_output, steer_Tuning_type);
 
   //for the speed tuning, it is more likely as thermal control.
