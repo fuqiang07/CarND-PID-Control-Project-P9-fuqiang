@@ -28,7 +28,12 @@ public:
   /*
    * Twiddle Parameters
    */
-  bool flag_twiddle;
+  enum Tunings {
+      Manual,
+      Twiddle,
+      Adaptive
+  };
+  Tunings flag_tuning;
   std::vector<double> dp;
   int step, param_index;
   // number of steps to allow changes to settle, then to evaluate error
@@ -55,7 +60,7 @@ public:
   /*
   * Initialize PID.
   */
-  void Init(double Kp, double Ki, double Kd, double Max_Output);
+  void Init(double Kp, double Ki, double Kd, double Max_Output, Tunings Tuning_type);
 
   /*
   * Update the PID error variables given cross track error.

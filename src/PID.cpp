@@ -16,7 +16,7 @@ PID::~PID() {}
 /*
 * Initialize PID.
 */
-void PID::Init(double Kp, double Ki, double Kd, double Max_Output) {
+void PID::Init(double Kp, double Ki, double Kd, double Max_Output, Tunings Tuning_type) {
     //Set PID parameters to assigned values
     Kp_ = Kp;
     Ki_ = Ki;
@@ -43,7 +43,7 @@ void PID::Init(double Kp, double Ki, double Kd, double Max_Output) {
     is_initialized_ = false;
 
     // Twiddling parameters
-    flag_twiddle = true;
+    flag_tuning = Tuning_type;
     dp = {0.5*Kp,0.5*Kd,0.5*Ki};
     step = 1;
     param_index = 2;  // this will wrao back to 0 after the first twiddle loop
@@ -101,7 +101,7 @@ void PID::UpdateError(double cte) {
     }
 
     // last step in twiddle loop... twiddle it?
-    if (flag_twiddle && step % (n_settle_steps + n_eval_steps) == 0){
+    if (flag_tuning && step % (n_settle_steps + n_eval_steps) == 0){
         cout << "step: " << step << endl;
         cout << "total error: " << total_error << endl;
         cout << "best error: " << best_error << endl;
