@@ -42,6 +42,12 @@ public:
   double total_error, best_error;
   bool tried_adding, tried_subtracting, yes_i_wanna_twiddle;
 
+  bool flag_adaptive;
+  double adap_p_gain;
+  double adap_i_gain;
+  double adap_d_gain;
+  double adap_sliding_gain;
+
   /*
   * Tune PID parameters by Twiddle Algorithm
   */

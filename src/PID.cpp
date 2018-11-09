@@ -48,11 +48,18 @@ void PID::Init(double Kp, double Ki, double Kd, double Max_Output, Tunings Tunin
     step = 1;
     param_index = 2;  // this will wrao back to 0 after the first twiddle loop
     n_settle_steps = 100;
-    n_eval_steps = 2000;
+    n_eval_steps = 200;
     total_error = 0;
     best_error = std::numeric_limits<double>::max();
     tried_adding = false;
     tried_subtracting = false;
+
+    // Adaptive PID
+    flag_adaptive = true;
+    adap_p_gain = 1.0e-6;
+    adap_i_gain = 1.0e-6;
+    adap_d_gain = 1.0e-6;;
+    adap_sliding_gain = 10;
 }
 
 /*
@@ -95,6 +102,9 @@ void PID::UpdateError(double cte) {
         i_output_ = -max_i_output_;
     }
 
+    /*****************************************************************************
+    *  Twiddle Tuning
+    ****************************************************************************/
     // update total error only if we're past number of settle steps
     if (step % (n_settle_steps + n_eval_steps) > n_settle_steps){
         total_error += pow(cte,2);
@@ -139,6 +149,18 @@ void PID::UpdateError(double cte) {
         cout << "P: " << Kp_ << ", I: " << Ki_ << ", D: " << Kd_ << endl;
     }
     step++;
+
+    /*****************************************************************************
+    *  Adaptive Tuning
+    ****************************************************************************/
+    if(flag_adaptive){
+        double z = -(p_error_ * adap_sliding_gain + d_error_);
+        Kp_ = Kp_ - adap_p_gain * p_error_ * z;
+        Ki_ = Ki_ - adap_i_gain * i_error_ * z;
+        Kd_ = Kd_ - adap_d_gain * d_error_ * z;
+        cout << "new parameters for adaptive PID" << endl;
+        cout << "P: " << Kp_ << ", I: " << Ki_ << ", D: " << Kd_ << endl;
+    }
 }
 
 /*
