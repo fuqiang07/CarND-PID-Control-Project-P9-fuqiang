@@ -171,7 +171,7 @@ int main()
           Debug( "[main] ===================== : speed_error = " << speed_error << "      throttle_value = " << throttle_value << endl);
 
           // DEBUG
-          std::cout << "CTE: " << cte << " Steering Value: " << steer_value << std::endl;
+          Debug( "CTE: " << cte << " Steering Value: " << steer_value << endl);
 
           json msgJson;
           msgJson["steering_angle"] = steer_value;
