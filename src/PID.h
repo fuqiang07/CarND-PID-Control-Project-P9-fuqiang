@@ -2,6 +2,12 @@
 #define PID_H
 #include <vector>
 
+enum Tunings {
+    Manual,
+    Twiddle,
+    Adaptive
+};
+
 class PID {
 public:
     ///* initially set to false, set to true in first call of ProcessMeasurement
@@ -28,11 +34,6 @@ public:
   /*
    * Twiddle Parameters
    */
-  enum Tunings {
-      Manual,
-      Twiddle,
-      Adaptive
-  };
   Tunings flag_tuning;
   std::vector<double> dp;
   int step, param_index;
