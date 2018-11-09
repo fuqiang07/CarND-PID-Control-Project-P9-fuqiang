@@ -1,6 +1,7 @@
 #include "PID.h"
 #include <cmath>
 #include <iostream>
+#include <limits>
 
 using namespace std;
 
@@ -135,7 +136,7 @@ void PID::UpdateError(double cte) {
         }
         total_error = 0;
         cout << "new parameters" << endl;
-        cout << "P: " << Kp << ", I: " << Ki << ", D: " << Kd << endl;
+        cout << "P: " << Kp_ << ", I: " << Ki_ << ", D: " << Kd_ << endl;
     }
     step++;
 }
