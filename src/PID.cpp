@@ -101,7 +101,7 @@ void PID::UpdateError(double cte) {
     }
 
     // last step in twiddle loop... twiddle it?
-    if (flag_tuning && step % (n_settle_steps + n_eval_steps) == 0){
+    if (flag_tuning == Twiddle && step % (n_settle_steps + n_eval_steps) == 0){
         cout << "step: " << step << endl;
         cout << "total error: " << total_error << endl;
         cout << "best error: " << best_error << endl;
