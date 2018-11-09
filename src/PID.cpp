@@ -57,8 +57,8 @@ void PID::Init(double Kp, double Ki, double Kd, double Max_Output, Tunings Tunin
     // Adaptive PID
     flag_adaptive = true;
     adap_p_gain = 1.0e-6;
-    adap_i_gain = 1.0e-6;
-    adap_d_gain = 1.0e-6;;
+    adap_i_gain = 1.0e-8;
+    adap_d_gain = 1.0e-4;;
     adap_sliding_gain = 10;
 }
 
@@ -153,7 +153,7 @@ void PID::UpdateError(double cte) {
     /*****************************************************************************
     *  Adaptive Tuning
     ****************************************************************************/
-    if(flag_adaptive){
+    if(flag_tuning == Adaptive){
         double z = -(p_error_ * adap_sliding_gain + d_error_);
         Kp_ = Kp_ - adap_p_gain * p_error_ * z;
         Ki_ = Ki_ - adap_i_gain * i_error_ * z;
